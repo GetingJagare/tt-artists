@@ -1,0 +1,43 @@
+version: '2'
+services:
+  artists_php:
+    build:
+      dockerfile: php/Dockerfile
+    user: "1000:1000"  
+    volumes:
+      - ./artists:/var/www/app/:rw
+    depends_on:
+      - artists_db
+      - composer
+      - redis
+  redis:
+    image: 'redis:7.0'
+    ports:
+      - '6379:6379'        
+  composer:
+    image: composer/composer:2.5.4
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - '80:80'
+    links:
+      - 'artists_php:php'
+    volumes:
+      - ./artists:/var/www/app/:rw
+      - ./nginx-conf:/etc/nginx/conf.d/:ro
+    depends_on:
+      - artists_php
+
+  artists_db:
+    container_name: artists_db
+    image: mariadb:10.3
+    ports:
+      - '3306:3306'
+    env_file:
+      - .env
+    volumes:
+      - artists_mysql:/var/lib/mysql
+
+volumes:
+  artists_mysql:
