@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Album;
+use App\Models\Artist;
+use App\Models\Track;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    var_dump(Track::all()->toArray()); die;
     return view('welcome');
 });
