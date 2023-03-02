@@ -24,4 +24,5 @@ docker exec -i artists_php bash /entrypoint.sh
 ```
 
 App URL: ```http://artists.localhost```
+
 API Docs: ```http://artists.localhost/api/documentation```
