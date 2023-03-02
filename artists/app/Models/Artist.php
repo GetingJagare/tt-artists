@@ -12,6 +12,6 @@ class Artist extends Model
     protected $fillable = ['title'];
 
     public function albums() {
-        return $this->hasMany(Album::class);
+        return $this->hasMany(Album::class)->withPivot([]);
     }
 }

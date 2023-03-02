@@ -14,4 +14,8 @@ class Album extends Model
     public function artist() {
         return $this->belongsTo(Artist::class);
     }
+
+    public function tracks() {
+        return $this->belongsToMany(Track::class, 'album_track')->withPivot('order');
+    }
 }

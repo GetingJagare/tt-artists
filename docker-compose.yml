@@ -1,6 +1,7 @@
 version: '2'
 services:
   artists_php:
+    container_name: artists_php
     build:
       dockerfile: php/Dockerfile
     user: "1000:1000"  

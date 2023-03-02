@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Album;
+use App\Models\Track;
 
 class TrackSeeder extends Seeder
 {
@@ -21,7 +22,7 @@ class TrackSeeder extends Seeder
         $albumTrackCount = [];
 
         for ($i = 1; $i <= 2000; $i++) {
-            DB::table('tracks')->insert([
+            $track = Track::create([
                 'title' => "Track $i",
             ]);
 
@@ -44,7 +45,7 @@ class TrackSeeder extends Seeder
                 $albumTrackCount[$id] = $albumTrackCount[$id] ?? 0;
                 DB::table('album_track')->insert([
                     'album_id' => $id,
-                    'track_id' => $i,
+                    'track_id' => $track->id,
                     'order' => ++$albumTrackCount[$id],
                 ]);
             }

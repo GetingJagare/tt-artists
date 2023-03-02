@@ -3,6 +3,7 @@ FROM php:8.1-fpm
 WORKDIR /var/www/app
 
 COPY artists/ .
+COPY php/entrypoint.sh /
 
 # Installing dependencies for the PHP modules
 RUN apt-get update
@@ -19,3 +20,4 @@ RUN echo '\nphp_admin_value[short_open_tag] = on' >> /usr/local/etc/php-fpm.d/ww
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN composer install
+
